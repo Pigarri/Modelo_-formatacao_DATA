@@ -1,0 +1,33 @@
+    public void readJTable() {
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTableNossoNumero.getModel();
+        modelo.setNumRows(0);
+        NossoNumeroDAO adao = new NossoNumeroDAO();
+        
+        modelo.fireTableDataChanged();
+        
+
+        for (NossoNumero b : adao.readnossonumero()) {
+            
+            //FORMATANDO DATA QUE APARECE NA JTABLE
+            String dformat = new SimpleDateFormat("dd/MM/yyyy").format(b.getDat_vencto());
+            
+            modelo.addRow(new Object[]{
+                
+                b.getCdn_cliente(),
+                b.getNom_pessoa(),
+                b.getCod_ser_docto(),
+                //b.getCod_tit_acr(),
+                b.getCod_parcela(),
+                b.getCod_tit_acr_bco(),
+                b.getVal_sdo_tit_acr(),
+                dformat,
+                b.getNum_id_tit_acr()
+
+            });
+
+        }
+
+    }
+
+//neste caso utilizei para formatar a data que aparecia na minha JTable.
